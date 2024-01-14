@@ -33,9 +33,21 @@ void LabWorker::createLabWorker(const std::string &username, long id, const std:
 
     addToWorkersList(&newLabworker);
 
-    User::addUserLabWorker(&newLabworker);
+    LabWorker::addUserLabWorker(&newLabworker);
 }
+void LabWorker::addUserLabWorker(LabWorker *labWorker)
+{
+    User newUser(labWorker->getUserInfo().getName(),
+                 labWorker->getUserInfo().getSurname(),
+                 labWorker->getUserInfo().getUsername(),
+                 labWorker->getUserInfo().getPassword(),
+                 labWorker->getUserInfo().getPhone(),
+                 labWorker->getUserInfo().getId(),
+                 labWorker->getUserInfo().getIsAdmin(),
+                 AccountType::LABMAN);
 
+    User::users.push_back(newUser);
+}
 void LabWorker::addToWorkersList(const LabWorker *existingWorker)
 {
     // If the capacity of the vector is insufficient, expand it
@@ -43,7 +55,7 @@ void LabWorker::addToWorkersList(const LabWorker *existingWorker)
     {
         if (labWorkerCapacity == 0)
         {
-            labWorkerCapacity = INITIAL_CAPACITY;
+            labWorkerCapacity = 10;
         }
         else
         {
@@ -202,7 +214,19 @@ void LabWorker::removeLabWorker(int labWorkerId, int userId)
     // User not found
     std::cout << "User with ID " << userId << " not found." << std::endl;
 }
+LabWorker *LabWorker::verifyLabWorker(const string &inputUsername, const string &inputPassword)
+{
+    for (size_t i = 0; i < LabWorker::labWorkers.size(); ++i)
+    {
+        if (inputUsername == LabWorker::labWorkers[i].getUserInfo().getUsername() &&
+            inputPassword == LabWorker::labWorkers[i].getUserInfo().getPassword())
+        {
+            return &LabWorker::labWorkers[i]; // LabWorker found, return LabWorker information
+        }
+    }
 
+    return nullptr; // LabWorker not found or password is incorrect
+}
 void LabWorker::setLabWorkerPassword(User *user, const std::string &password)
 {
     user->setPassword(password);

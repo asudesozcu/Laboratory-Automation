@@ -23,6 +23,8 @@ public:
 
     // Member functions
     static void getPatientInfo(int patientID);
+    static Patient *verifyPatient(const string &inputUsername, const string &inputPassword);
+    static void addUserPatient(Patient *patient);
 
     static void setPatientPassword(User *user, const string &newPassword);
     static void setPatientPhone(User *user, const string &newPhone);

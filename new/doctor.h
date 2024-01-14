@@ -25,6 +25,8 @@ public:
 
     static int requestBloodAnalysis(int doctorID, int patientID);
    static  int requestUrineAnalysis(int doctorID, int patientID);
+    static Doctor *verifyDoctor(const string &inputUsername, const string &inputPassword);
+    static void addUserDoctor(Doctor *doctor);
 
     // Function to add a patient to the doctor's list
     static void addPatient(Patient *patient, Doctor *doctor);

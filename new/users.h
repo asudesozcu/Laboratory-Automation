@@ -3,10 +3,6 @@
 
 #include <string>
 #include <vector>
-#include "analysis.h"
-#include "patient.h"
-#include "doctor.h"
-#include "labworker.h"
 
 
 using namespace std;
@@ -31,12 +27,6 @@ public:
     // Getter and Setter methods
     static const string accountTypeToString(AccountType type);
     static User* verifyUser(const string &inputUsername, const string &inputPassword);
-    static Patient *verifyPatient(const string &inputUsername, const string &inputPassword);
-    static Doctor *verifyDoctor(const string &inputUsername, const string &inputPassword);
-    static LabWorker *verifyLabWorker(const string &inputUsername, const string &inputPassword);
-    static void addUserLabWorker(LabWorker *labWorker);
-    static void addUserPatient(Patient *patient);
-    static void addUserDoctor(Doctor *doctor);
 
     // Getter and Setter methods
     const string &getName() const;

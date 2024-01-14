@@ -20,6 +20,8 @@ public:
     // Member functions
     void changeDeviceStatus(int deviceID, const string &deviceName);
 static void getInfo(const LabWorker *labWorker);
+    static LabWorker *verifyLabWorker(const string &inputUsername, const string &inputPassword);
+    static void addUserLabWorker(LabWorker *labWorker);
 
     // Getter ve Setter metotları
     const User &getUserInfo() const { return userInfo; }

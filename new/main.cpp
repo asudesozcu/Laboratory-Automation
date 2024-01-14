@@ -1,9 +1,11 @@
 #include <iostream>
-#include "device.h"
+#include "users.h"
 #include "doctor.h"
 #include "patient.h"
-#include "users.h"
 #include "labworker.h"
+
+#include "device.h"
+
 #include "analysis.h"
 
 using namespace std;
@@ -895,7 +897,13 @@ jump:
                 std::cout << "Invalid choice." << std::endl;
                 break;
             }
-                return 0;
+                
             }
-        }
-    }//PARANETZ HATASI MUHTEMEL
+        }printf("Not allowed to use as admin");
+    }
+    else
+    {
+        printf("Invalid inputs. Please check your information.\n");
+    }
+    return 0;
+}

@@ -322,7 +322,7 @@ Doctor Doctor::createDoctor(const std::string &title, int id, const std::string 
     newDoctor->patientCount = 0;
 
     // Yeni doktoru kullanıcı listesine ve doktorlar dizisine ekle
-    User::addUserDoctor(newDoctor);
+    Doctor::addUserDoctor(newDoctor);
     addDoctortoDoctorsArray(newDoctor);
 
     return *newDoctor;
@@ -380,6 +380,33 @@ void Doctor::printDoctorPatients(const Doctor *doctor)
     }
 }
 
+void Doctor::addUserDoctor(Doctor *doctor)
+{
+    User newUser(doctor->getUserInfo().getName(),
+                 doctor->getUserInfo().getSurname(),
+                 doctor->getUserInfo().getUsername(),
+                 doctor->getUserInfo().getPassword(),
+                 doctor->getUserInfo().getPhone(),
+                 doctor->getUserInfo().getId(),
+                 doctor->getUserInfo().getIsAdmin(),
+                 AccountType::DOCTOR);
+
+    User::users.push_back(newUser);
+}
+
+Doctor *Doctor::verifyDoctor(const string &inputUsername, const string &inputPassword)
+{
+    for (size_t i = 0; i < Doctor::doctors.size(); ++i)
+    {
+        if (inputUsername == Doctor::doctors[i].getUserInfo().getUsername() &&
+            inputPassword == Doctor::doctors[i].getUserInfo().getPassword())
+        {
+            return &Doctor::doctors[i]; // Doctor found, return doctor information
+        }
+    }
+
+    return nullptr; // Doctor not found or password is incorrect
+}
 void Doctor::deleteDoctor(int doctorID) {
     auto it = std::remove_if(doctors.begin(), doctors.end(), [doctorID](const Doctor& doctor) {
         return doctor.getId() == doctorID;

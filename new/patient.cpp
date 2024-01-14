@@ -23,7 +23,19 @@ Patient::Patient(const string &username, int id, const string &password, const s
 vector<Patient> Patient::patients;
 int Patient::patientCount = 0;
 int Patient::patientsCapacity = 10;
+void Patient::addUserPatient(Patient *patient)
+{
+    User newUser(patient->getUserInfo().getName(),
+                 patient->getUserInfo().getSurname(),
+                 patient->getUserInfo().getUsername(),
+                 patient->getUserInfo().getPassword(),
+                 patient->getUserInfo().getPhone(),
+                 patient->getUserInfo().getId(),
+                 patient->getUserInfo().getIsAdmin(),
+                 AccountType::PATIENT);
 
+    User::users.push_back(newUser);
+}
 void getPatientInfo(int patientID) {
     for (size_t i = 0; i < Patient::patientCount; i++) {
         if (Patient::patients[i].userInfo.getId() == patientID) {
@@ -95,8 +107,20 @@ void Patient::addToPatientsList(Patient* existingPatient) {
     }
     // Add the existing patient
 }
+Patient * Patient::verifyPatient(const string &inputUsername, const string &inputPassword)
+{
+    for (size_t i = 0; i < Patient::patients.size(); ++i)
+    {
+        if (inputUsername == Patient::patients[i].getUserInfo().getUsername() &&
+            inputPassword == Patient::patients[i].getUserInfo().getPassword())
+        {
+            return &Patient::patients[i]; // Patient found, return patient information
+        }
+    }
 
-User *user,::createPatient(const std::string &username, int id, const std::string &password, const std::string &name, const std::string &surname, const std::string &phone) {
+    return nullptr; // Patient not found or password is incorrect
+}
+Patient Patient::createPatient(const std::string &username, int id, const std::string &password, const std::string &name, const std::string &surname, const std::string &phone) {
     // Check if the ID is already taken
     for (const User &user : User::users) {
         if (user.getId() == id) {
@@ -112,7 +136,7 @@ User *user,::createPatient(const std::string &username, int id, const std::strin
     Patient::patients.push_back(newPatient); // Assuming 'patients' is a static member of the Patient class
 
     // Add the new patient to the users list
-    User::addUserPatient(&newPatient);
+    Patient::addUserPatient(&newPatient);
 
     std::cout << "Patient created!" << std::endl;
     return newPatient;
