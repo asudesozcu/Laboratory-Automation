@@ -1,0 +1,8 @@
+Analysis ID: 1
+Doctor: Ahmet Ak
+Patient: Asude Sozcu 12
+Type: Blood
+Date: 2024-01-18 11:39:12
+Result: High
+Status: Test Concluded
+
