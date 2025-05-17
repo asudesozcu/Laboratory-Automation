@@ -10,10 +10,3 @@ A desktop-based Laboratory Automation System developed using Java Swing. The app
 - Table-based interface to display and search patient/test data
 - Input validation and user-friendly feedback dialogs
 
-##📁 Project Structure
-- Laboratory-Automation/
-├── gui/              # All UI components
-├── model/            # Data models for patients, tests, and results
-├── service/          # Core logic and data manipulation
-├── util/             # Utility classes (e.g., validators)
-└── Main.java         # Application entry point
